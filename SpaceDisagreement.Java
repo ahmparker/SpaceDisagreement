@@ -24,13 +24,18 @@ public class SpaceDisagreement  {
 		}
 	}
 	
+	public double starDistance(int i, int j){
+		int X = ((int) starList.get(i).getX() - ((int) starList.get(j).getX()));// get difference between the two x coordinates
+		int Y = ((int) starList.get(i).getY()) - ((int) starList.get(j).getY());// get difference between the two y coordinates
+		double distance = Math.hypot(X, Y);//finds distance between the two points
+		return distance;
+	}
+	
 	public void createGraph() {
 		Graph starGraph = new Graph(starList.size());
 		for (int i = 0; i < starList.size(); i++) {
 			  for (int j = i+1; j < starList.size(); j++) {
-			    int X = ((int) starList.get(i).getX() - ((int) starList.get(j).getX()));// get difference between the two x coordinates
-			    int Y = ((int) starList.get(i).getY()) - ((int) starList.get(j).getY());// get difference between the two y coordinates
-			    double distance = Math.hypot(X, Y); //finds distance between the two points
+				double distance = starDistance(i,j);
 			    if ((distance / 100) < 0.15) { //there's an edge here
 			    	starGraph.addEdge(i,j); //adds edges to all applicable points in the graph in the order we input the points
 			    }
